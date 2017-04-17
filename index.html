@@ -31,6 +31,7 @@
 				
 				</div>
 			</div>
+				<strong>Current progress:</strong>
 			<div class="progress">
 				<div class="progress-bar" id="progress" style="width: 0%;"></div>
 			</div>
@@ -55,7 +56,7 @@
 					'no': continue_test,
 					'Repeat please': repeat,
 					'More information please': more_information,
-					'Show me the progress:' : show_progress,
+					'Show my progress please' : show_progress,
 					'The answer is *answer': process_answer,
 					'Help': guide_user,
 					'Instructions Please': guide_user,
@@ -66,11 +67,18 @@
 				annyang.addCommands(commands);
 
 				// Start listening. You can call this here, or attach this call to an event, button, etc.
-				annyang.start( );
+				annyang.start( {
+					paused: false,
+					continuous: true,
+					autoRestart: true
+				} );
 
-				annyang.addCallback('error', function() {
+				annyang.addCallback('error', function( error ) {
+					console.log( error );
 					speak( 'There was an error!' );
 				} );
+
+				annyang.debug( );
 			}
 		</script>
 	</body>

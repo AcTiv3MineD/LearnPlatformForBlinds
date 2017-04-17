@@ -23,30 +23,40 @@ function begin_test( ){
 
 function exit_test( ){
 	if( !test_started ){
-		alert( 'The test has not started!' );
+		speak( 'The test has not started!' );
 	}
 	else {
-		$( '#test_box' ).hide( );
-		$( '#index_box' ).fadeIn( );
-
-		test_started = false;
+		speak( "Do you realy want to exit the test?" );
 	}
 }
 
 function confirm_exit_test( ){
-	//
+	if( !exit_prompt ) return;
+
+	$( '#test_box' ).hide( );
+	$( '#index_box' ).fadeIn( );
+
+	exit_prompt = false;
+	test_started = false;
 }
 
 function continue_test( ){
-	//
+	speak( 'The test will continue!' );
 }
 
 function show_progress( ){
-	//
+	speak( "Yo have completed: " + progress + ' of ' + questions.length );
 }
 
 function guide_user( ){
-	//
+	speak( "Lost ugh?, let me help you!" );
+	speak( "To show your current progress, just say: Show my progress please." );
+	speak( "To begin the test, just say: Begin test." );
+	speak( "To end the test, just say: Finis test or Abort Test." );
+	speak( "To get a deeper explanation of a question just say: More Information Please." );
+	speak( "To repeat a question, just say: Repeat Please." );
+	speak( "To answer a question, just say, The answer is. Followed by your response." );
+	speak( "Good bye!" );
 }
 
 function repeat( ){
@@ -83,8 +93,6 @@ function select_question( ){
 function process_answer( given_answer ){
 	given_answer = given_answer.toLowerCase( );
 
-	console.log( given_answer + ' ' + question.answer );
-	console.log( typeof( given_answer ) + ' ' + typeof( question.answer ) );
 	$( "#software_interpretation" ).html( given_answer );
 	speak( 'Your answer was: ' + given_answer );
 
