@@ -1,35 +1,77 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="general.css" />
 		<title>Blind test</title>
 	</head>
 	<body>
+		<div class="container" id="index_box">
+			<div class="alert" id="test_result"></div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Test Platform For Blind People</h3>
+				</div>
+				<div class="panel-body">
+					<p>Howdy Instructor, this is a platform which helps bling people perform guided test, with the less human intervantion possible.</p>
+					<p>This system is all Voice Managed!</p>
+					<p>To Start, just say <strong>Begin Test</strong></p>
+					<p>For help, just say <strong>help</strong> :P</p>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="test_box">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title" id="question_name"></h3>
+				</div>
+				<div class="panel-body" id="question_description">
+				</div>
+				<div class="panel-footer" id="software_interpretation">
+				
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar" id="progress" style="width: 0%;"></div>
+			</div>
+		</div>
 
-	<script src="http://www.meinesoldaten.com/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="annyang.min.js"></script>
-	<script>
-		if (annyang) {
-			var commands = {
-				'The answer is *answer': helloFunction,
-				'La respuesta es *respuesta': helloFunction,
-				'Repeat please': repeat
-			};
-			
-			annyang.addCommands(commands);
+		<script src="http://www.meinesoldaten.com/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+		<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+		<script src="annyang.min.js"></script>
+		<script src="questions.js"></script>
+		<script src="general.js"></script>
+		<script src="functions.js"></script>
+		<!--script src="tester.js"></script-->
+		<script>
 
-			alert('A');
+			if (annyang) {
+				var commands = {
+					'Begin test': begin_test,
+					'Exit test': exit_test,
+					'Finish test': exit_test,
+					'Abort test': exit_test,
+					'yes': confirm_exit_test,
+					'no': continue_test,
+					'Repeat please': repeat,
+					'More information please': more_information,
+					'Show me the progress:' : show_progress,
+					'The answer is *answer': process_answer,
+					'Help': guide_user,
+					'Instructions Please': guide_user,
+				};
 
-			// Start listening. You can call this here, or attach this call to an event, button, etc.
-			annyang.start();
-		}
+				//alert('A');
+				
+				annyang.addCommands(commands);
 
-		function helloFunction( rest ){
-			alert( 'Working bitch!' + rest );
-		}
-		
-		function repeat( ){
-			alert( 'Repeating' );
-		}
-	</script>
+				// Start listening. You can call this here, or attach this call to an event, button, etc.
+				annyang.start( );
+
+				annyang.addCallback('error', function() {
+					speak( 'There was an error!' );
+				} );
+			}
+		</script>
 	</body>
 </html>
