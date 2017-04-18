@@ -5,7 +5,7 @@ function begin_test( ){
 	else {
 		if( first_time ){
 			first_time = 0;
-			speak( 'The test is about to start. Please follow this simple instruction to answer the questions.' );
+			speak( 'La prueba está por comenzar. Please follow this simple instruction to answer the questions.' );
 			speak( 'To answer a question you should say: The answer is. ( followed by your answer ).' );
 			speak( 'You can ask me to repeat the question for you by saying. Repeat please. Or have more information by saying More information please.' );
 			speak( 'Good Luck!' );
@@ -65,7 +65,9 @@ function repeat( ){
 }
 
 function select_question( ){
-	$( '#software_interpretation' ).html( '' );
+	$( '#software_interpretation' ).val( '' );
+	$( '#response_changer' ).attr( 'disabled', true );
+	$( '#software_interpretation' ).attr( 'disabled', true );
 
 	if( progress == questions.length ){
 		finish_test( );
@@ -93,16 +95,48 @@ function select_question( ){
 function process_answer( given_answer ){
 	given_answer = given_answer.toLowerCase( );
 
-	$( "#software_interpretation" ).html( given_answer );
+	$( "#software_interpretation" ).val( given_answer );
 	speak( 'Your answer was: ' + given_answer );
 
+	var response_correctness = false;
 	if( strcmp( given_answer, question.answer ) == 0 ){
 		correct_answers++;
+		response_correctness = true;
 	}
+	else {
+		$( '#software_interpretation' ).attr( 'disabled', false );
+		$( '#response_changer' ).attr( 'disabled', false );
+		return;
+	}
+
+	play_feedback_sound( response_correctness );
 
 	setTimeout( function( ){
 		select_question( );
 	}, 3000 );
+}
+
+$( '#response_changer' ).click( function( ) {
+	var given_answer = $( "#software_interpretation" ).val( );
+
+	response_correctness = false;
+	if( strcmp( given_answer, question.answer ) == 0 ){
+		correct_answers++;
+		response_correctness = true;
+	}
+
+	play_feedback_sound( response_correctness );
+	select_question( );
+
+} );
+
+function play_feedback_sound( response_correctness ){
+	if( response_correctness ){
+		speak( 'Correcto' );
+	}
+	else {
+		speak( 'Incorrecto' );
+	}
 }
 
 function finish_test( ){
@@ -143,7 +177,7 @@ function more_information( ){
 }
 
 function speak( text ){
-	responsiveVoice.speak( text );
+	responsiveVoice.speak( text, 'Spanish Female' );
 }
 
 function strcmp(a, b) {

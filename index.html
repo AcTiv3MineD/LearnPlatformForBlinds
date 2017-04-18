@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="general.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 		<title>Blind test</title>
 	</head>
 	<body>
@@ -15,7 +17,7 @@
 				<div class="panel-body">
 					<p>Howdy Instructor, this is a platform which helps bling people perform guided test, with the less human intervantion possible.</p>
 					<p>This system is all Voice Managed!</p>
-					<p>To Start, just say <strong>Begin Test</strong></p>
+					<p>To Start, just say <strong>Comenzar prueba</strong></p>
 					<p>For help, just say <strong>help</strong> :P</p>
 				</div>
 			</div>
@@ -27,8 +29,15 @@
 				</div>
 				<div class="panel-body" id="question_description">
 				</div>
-				<div class="panel-footer" id="software_interpretation">
-				
+				<div class="panel-footer" id="">
+					<div class="row">
+						<div class="col-md-10">
+							<input type="text" value="" id="software_interpretation" class="form-control" placeholder="Aquí se pone lo que interpretó el software..." />
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-block btn-success" id="response_changer"><i class="fa fa-refresh"></i> Re evaluar</button>
+						</div>
+					</div>
 				</div>
 			</div>
 				<strong>Current progress:</strong>
@@ -43,12 +52,12 @@
 		<script src="questions.js"></script>
 		<script src="general.js"></script>
 		<script src="functions.js"></script>
-		<!--script src="tester.js"></script-->
+		<script src="tester.js"></script>
 		<script>
 
 			if (annyang) {
 				var commands = {
-					'Begin test': begin_test,
+					'Comenzar prueba': begin_test,
 					'Exit test': exit_test,
 					'Finish test': exit_test,
 					'Abort test': exit_test,
@@ -57,7 +66,7 @@
 					'Repeat please': repeat,
 					'More information please': more_information,
 					'Show my progress please' : show_progress,
-					'The answer is *answer': process_answer,
+					'La respuesta es *answer': process_answer,
 					'Help': guide_user,
 					'Instructions Please': guide_user,
 				};
@@ -74,8 +83,11 @@
 				} );
 
 				annyang.addCallback('error', function( error ) {
-					console.log( error );
-					speak( 'There was an error!' );
+						speak( 'There was an error, a restart is suggested!' );
+	           
+						if ( !annyang.isListening( ) ) {
+							annyang.start( );
+						}
 				} );
 
 				annyang.debug( );
