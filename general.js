@@ -8,14 +8,14 @@ var first_time = 1;
 var exit_prompt = 0;
 
 var ordinals = [
-	'First',
-	'Second',
-	'Third',
-	'Fourth',
-	'Fifth',
-	'Sixth',
-	'Seventh',
-	'Eighth',
-	'Ninth',
-	'Tenth'
+	'Primero',
+	'Segundo',
+	'Tercero',
+	'Cuarto',
+	'Quinto',
+	'Sexto',
+	'Septimo',
+	'Octavo',
+	'Noveno',
+	'Decimo'
 ];

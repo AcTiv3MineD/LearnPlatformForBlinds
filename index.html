@@ -3,20 +3,20 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="general.css" />
-		<title>Blind test</title>
+		<title>Examen Para No-Videntes</title>
 	</head>
 	<body>
 		<div class="container" id="index_box">
 			<div class="alert" id="test_result"></div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">Test Platform For Blind People</h3>
+					<h3 class="panel-title">Plataforma de Examenes para No-Videntes</h3>
 				</div>
 				<div class="panel-body">
-					<p>Howdy Instructor, this is a platform which helps bling people perform guided test, with the less human intervantion possible.</p>
-					<p>This system is all Voice Managed!</p>
-					<p>To Start, just say <strong>Begin Test</strong></p>
-					<p>For help, just say <strong>help</strong> :P</p>
+					<p>Saludos Instructor, esta es la plataforma que pretende examinar personas no-videntes sin (o con poca) intervencion humana.</p>
+					<p>Este sistema se maneja completamente con la voz!</p>
+					<p>Para comenzar, solo diga <strong>Comenzar Examen</strong></p>
+					<p>Si necesita ayuda, diga <strong>Ayuda</strong> :P</p>
 				</div>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 				
 				</div>
 			</div>
-				<strong>Current progress:</strong>
+				<strong>Progreso:</strong>
 			<div class="progress">
 				<div class="progress-bar" id="progress" style="width: 0%;"></div>
 			</div>
@@ -48,18 +48,18 @@
 
 			if (annyang) {
 				var commands = {
-					'Begin test': begin_test,
-					'Exit test': exit_test,
-					'Finish test': exit_test,
-					'Abort test': exit_test,
-					'yes': confirm_exit_test,
+					'Comenzar examen': begin_test,
+					'Cancelar examen': exit_test,
+					'Finalizar examen': exit_test,
+					'Abortar examen': exit_test,
+					'si': confirm_exit_test,
 					'no': continue_test,
-					'Repeat please': repeat,
-					'More information please': more_information,
-					'Show my progress please' : show_progress,
-					'The answer is *answer': process_answer,
-					'Help': guide_user,
-					'Instructions Please': guide_user,
+					'Repetir pregunta': repeat,
+					'Mas informacion': more_information,
+					'Mostrar mi progreso' : show_progress,
+					'La respuesta es *respuesta': process_answer,
+					'Ayuda': guide_user,
+					'Instrucciones': guide_user,
 				};
 
 				//alert('A');
@@ -75,7 +75,7 @@
 
 				annyang.addCallback('error', function( error ) {
 					console.log( error );
-					speak( 'There was an error!' );
+					speak( 'Hubo un error!' );
 				} );
 
 				annyang.debug( );

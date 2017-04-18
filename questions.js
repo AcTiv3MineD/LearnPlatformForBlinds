@@ -1,42 +1,42 @@
 var questions = [
 	{
-		'name': "Which is the result of 2 plus 2",
-		'answer':"four",
-		'description': 'The sum is the result of adding two or more numbers. Example: 9 is the sum of 2, 4 and 3 ( because 2 + 4 + 3 = 9).'
+		'name': "Cual es el resultado de la suma de dos y dos",
+		'answer':"cuatro",
+		'description': 'La suma es el resultado de adicionar dos o mas numeros. Ejemplo: la 9 es la suma de 2, 4 y 3 (ya que 2 + 4 + 3 = 9).'
 	},
 	{
-		'name':"Which is the capital of United States?",
-		'answer':"washington",
-		'description': 'The capital of a nation is the main city of it.'
+		'name':"Cual es la capital de los Estados Unidos?",
+		'answer':"Washington",
+		'description': 'La capital de una nacion es la ciudad principal de la misma.'
 	},
 	{
-		'name':"Which is the 9th month of the year?",
-		'answer':"september",
-		'description': 'The capital of a nation is the main city of it.'
+		'name':"Cual es el noveno mes del año?",
+		'answer':"Septiembre",
+		'description': 'Es el mes que viene despues de agosto.'
 	},
 	{
-		'name':"Which continent is named the old continent?",
-		'answer':"europe",
-		'description': 'The capital of a nation is the main city of it.'
+		'name':"Cual continente se le es referido como el continente viejo?",
+		'answer':"Europa",
+		'description': 'Esta gran nacion tipicamente colonizaba a otras alrededor del mundo.'
 	},
 	{
-		'name':"Which is largest river in the world?",
-		'answer':"Amazon",
-		'description': 'The capital of a nation is the main city of it.'
+		'name':"Cual es el rio mas grande del mundo?",
+		'answer':"Amazona",
+		'description': 'En alguna nacion dentro de las Americas, se encuentra el mayor rio del mundo.'
 	},
 	{
-		'name':"How many days has January on a leap year?",
+		'name':"Cuantos dias tiene el mes de enero de un año bisiesto?",
 		'answer':"31",
-		'description': 'A.'
+		'description': 'Ehh'
 	},
 	{
-		'name':"The son of Homer on the Simpsons TV serie is:",
+		'name':"El nombre del hijo de Homero Simpson:",
 		'answer':'bart',
-		'description': 'The capital of a nation is the main city of it.'
+		'description': 'El hijo del personaje principal de la popular serie Los Simpsons tenia un pelo muy particular.'
 	},
 	{
-		'name':"Which is the most popular sport on Dominican Republic?",
-		'answer':"base ball",
-		'description': 'The capital of a nation is the main city of it.'
+		'name':"Cual es el deporte mas popular de la Republica Dominicana?",
+		'answer':"Baseball",
+		'description': 'El pais mencionado es muy popular por los profesionales que han emergido en este deporte de indole mundial.'
 	}
 ];
