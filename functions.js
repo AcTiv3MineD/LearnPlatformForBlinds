@@ -65,8 +65,6 @@ function repeat( ){
 }
 
 function select_question( ){
-	/*annyang.pause( );
-	annyang.start( );*/
 	$( '#software_interpretation' ).val( '' );
 
 	$( '#response_changer' ).attr( 'disabled', true );
