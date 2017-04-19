@@ -12,13 +12,13 @@
 			<div class="alert" id="test_result"></div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">Test Platform For Blind People</h3>
+					<h3 class="panel-title">Plataforma para examinar ciegos</h3>
 				</div>
 				<div class="panel-body">
-					<p>Howdy Instructor, this is a platform which helps bling people perform guided test, with the less human intervantion possible.</p>
-					<p>This system is all Voice Managed!</p>
-					<p>To Start, just say <strong>Comenzar prueba</strong></p>
-					<p>For help, just say <strong>help</strong> :P</p>
+					<p>Buenas instructor, esta plataforma está destinada a ayudar a personas ciegas para que tomen examenes, con la menor intervención posible.</p>
+					<p><strong>Este sistema es guiado por audio!</strong></p>
+					<p>Para comenzar, solo di, <strong>Comenzar examen</strong></p>
+					<p>Para ayuda, solo di, <strong>Ayuda</strong> :P</p>
 				</div>
 			</div>
 		</div>
@@ -40,11 +40,17 @@
 					</div>
 				</div>
 			</div>
-				<strong>Current progress:</strong>
+				<strong>Progreso actual: <em id="progress_percentage"></em></strong>
 			<div class="progress">
 				<div class="progress-bar" id="progress" style="width: 0%;"></div>
 			</div>
 		</div>
+
+		<footer class="footer">
+			<div class="container">
+			<p class="text-muted"><strong>Proyecto realizado por</strong>: <a href="https://www.facebook.com/oasting.ferrera">Oasting Ferrera. 20122051</a>.<a href="https://www.facebook.com/manuel.tolentino.961">Manuel Tolentino. 201200467</a>.<a href="http://www.inspira.com.do/">César Méndez. 20130262</a>.</p>
+			</div>
+		</footer>
 
 		<script src="http://www.meinesoldaten.com/js/jquery-1.10.2.min.js" type="text/javascript"></script>
 		<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
@@ -52,27 +58,30 @@
 		<script src="questions.js"></script>
 		<script src="general.js"></script>
 		<script src="functions.js"></script>
-		<script src="tester.js"></script>
+		<!--script src="tester.js"></script-->
 		<script>
 
 			if (annyang) {
 				var commands = {
-					'Comenzar prueba': begin_test,
-					'Exit test': exit_test,
-					'Finish test': exit_test,
-					'Abort test': exit_test,
-					'yes': confirm_exit_test,
+					'Comenzar examen': begin_test,
+					'Cancelar examen': exit_test,
+					'Finalizar examen': exit_test,
+					'Abortar examen': exit_test,
+					'si': confirm_exit_test,
 					'no': continue_test,
-					'Repeat please': repeat,
-					'More information please': more_information,
-					'Show my progress please' : show_progress,
-					'La respuesta es *answer': process_answer,
-					'Help': guide_user,
-					'Instructions Please': guide_user,
+					'Repetir pregunta': repeat,
+					'Explicar pregunta': more_information,
+					'Mostrar mi progreso' : show_progress,
+					'La respuesta es *respuesta': process_answer,
+					'Ayuda': guide_user,
+					'Instrucciones': guide_user,
 				};
 
-				//alert('A');
-				
+				speak( 'Bienvenido al sistema de examenes.' );
+				speak( 'Por favor, tener en cuenta, que cuando el sistema habla usted debe de permanecer en silencio.' );
+				speak( 'Para obtener ayuda simplemente diga: Ayuda.' );
+				speak( 'Para comenzar el examen diga: Comenzar examen.' );
+
 				annyang.addCommands(commands);
 
 				// Start listening. You can call this here, or attach this call to an event, button, etc.

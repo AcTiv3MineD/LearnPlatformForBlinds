@@ -1,14 +1,14 @@
 function begin_test( ){
 	if( test_started ){
-		speak( 'The test is already started!' );
+		speak( 'El examen ya comenzo!' );
 	}
 	else {
 		if( first_time ){
 			first_time = 0;
-			speak( 'La prueba está por comenzar. Please follow this simple instruction to answer the questions.' );
-			speak( 'To answer a question you should say: The answer is. ( followed by your answer ).' );
-			speak( 'You can ask me to repeat the question for you by saying. Repeat please. Or have more information by saying More information please.' );
-			speak( 'Good Luck!' );
+			speak( 'El examen esta por comenzar. Favor de seguir estas simples instrucciones para completar el examen.' );
+			speak( 'Para responder una pregunta debera decir: La respuesta es. Seguido por su respuesta.' );
+			speak( 'Puede pedirme que repita la pregunta simplemente pidiendomelo diciendo: repetir pregunta. Tambien puede solicitar mas informacion diciendo: Explicar pregunta.' );
+			speak( 'Buena Suerte!' );
 		}
 
 		$( '#index_box' ).hide( );
@@ -23,10 +23,10 @@ function begin_test( ){
 
 function exit_test( ){
 	if( !test_started ){
-		speak( 'The test has not started!' );
+		speak( 'El examen aun no ha comenzado!' );
 	}
 	else {
-		speak( "Do you realy want to exit the test?" );
+		speak( "Esta seguro que quiere salir del examen?" );
 	}
 }
 
@@ -41,31 +41,34 @@ function confirm_exit_test( ){
 }
 
 function continue_test( ){
-	speak( 'The test will continue!' );
+	speak( 'Continuemos el examen!' );
 }
 
 function show_progress( ){
-	speak( "Yo have completed: " + progress + ' of ' + questions.length );
+	speak( "Usted ha completado: " + progress + ' de ' + questions.length );
 }
 
 function guide_user( ){
-	speak( "Lost ugh?, let me help you!" );
-	speak( "To show your current progress, just say: Show my progress please." );
-	speak( "To begin the test, just say: Begin test." );
-	speak( "To end the test, just say: Finis test or Abort Test." );
-	speak( "To get a deeper explanation of a question just say: More Information Please." );
-	speak( "To repeat a question, just say: Repeat Please." );
-	speak( "To answer a question, just say, The answer is. Followed by your response." );
-	speak( "Good bye!" );
+	speak( "Esta un poco perdido?, permitame ayudar!" );
+	speak( "Para conocer su progreso actual, simplemente diga: Mostrar mi progreso." );
+	speak( "Para comenzar el examen, diga: Comenzar examen." );
+	speak( "Para terminar el examen, diga: Finalizar examen o Abortar examen." );
+	speak( "Para obtener mas informacion sobre la pregunta, diga: Explicar pregunta." );
+	speak( "Para repetir una pregunta, diga: Repetir pregunta." );
+	speak( "Para responder una pregunta, diga: La respuesta es. Seguido por la respuesta que desea dar." );
+	speak( "Adios!" );
 }
 
 function repeat( ){
-	speak( 'The ' + ordinals[ progress - 1 ] + ' question is: ' );
+	speak( 'La ' + ordinals[ progress - 1 ] + ' pregunta es: ' );
 	speak( question.name );
 }
 
 function select_question( ){
+	/*annyang.pause( );
+	annyang.start( );*/
 	$( '#software_interpretation' ).val( '' );
+
 	$( '#response_changer' ).attr( 'disabled', true );
 	$( '#software_interpretation' ).attr( 'disabled', true );
 
@@ -74,13 +77,14 @@ function select_question( ){
 		return;
 	}
 
-	speak( 'The ' + ordinals[ progress ] + ' question is: ' );
+	speak( 'La ' + ordinals[ progress ] + ' pregunta es: ' );
 
 	question = questions[ progress ];
 
 	$( "#question_name" ).html( question.name );
 	$( "#question_description" ).html( question.description );
 	$( "#progress" ).animate( { width: ( ( progress / questions.length )*100 ) + '%' } );
+	$( '#progress_percentage' ).html( ( ( progress / questions.length )*100 ) + '%' );
 
 	/*setTimeout( function( ){
 		speak( 'Hey!, seems you are stuck, here is more information for you!' );
@@ -96,7 +100,7 @@ function process_answer( given_answer ){
 	given_answer = given_answer.toLowerCase( );
 
 	$( "#software_interpretation" ).val( given_answer );
-	speak( 'Your answer was: ' + given_answer );
+	speak( 'Su respuesta fue: ' + given_answer );
 
 	var response_correctness = false;
 	if( strcmp( given_answer, question.answer ) == 0 ){
@@ -113,7 +117,7 @@ function process_answer( given_answer ){
 
 	setTimeout( function( ){
 		select_question( );
-	}, 3000 );
+	}, 5000 );
 }
 
 $( '#response_changer' ).click( function( ) {
@@ -126,7 +130,11 @@ $( '#response_changer' ).click( function( ) {
 	}
 
 	play_feedback_sound( response_correctness );
-	select_question( );
+
+	setTimeout( function( ){
+		select_question( );
+	}, 5000 );
+
 
 } );
 
@@ -138,18 +146,17 @@ function play_feedback_sound( response_correctness ){
 		speak( 'Incorrecto' );
 	}
 }
-
 function finish_test( ){
 	var text;
-	speak( 'You scored ' + correct_answers + ' out of ' + questions.length );
+	speak( 'Usted aserto ' + correct_answers + ' de ' + questions.length + ' preguntas.');
 
 	if( correct_answers >= ( questions.length )*0.5 ){
-		text = 'Congratulations, you performed well during this test!';
+		text = 'Felicidades, usted pasó el examen!';
 		$( "#test_result" ).removeClass( 'alert-danger' );
 		$( "#test_result" ).addClass( 'alert-success' );
 	}
 	else {
-		text = "Well!, it seems that you need more practicing on this topic. But don't worry, we are here for you, keep learning, and remember that Knowledge is power!";
+		text = "Vaya!, al parecer necesita practicar un poco mas sobre este tema. Pero no desista! Siempre estaremos aqui para ayudar. Recuerde que el conocimiento es poder.";
 		$( "#test_result" ).addClass( 'alert-danger' );
 		$( "#test_result" ).removeClass( 'alert-success' );
 	}
@@ -163,7 +170,7 @@ function finish_test( ){
 	$( '#index_box' ).fadeIn( );
 
 	annyang.addCallback( 'errorNetwork', function( ){
-		speak( 'Sorry, we have internet problems!' );
+		speak( 'Disculpe, actualmente hay problemas con la conexion a internet!' );
 	}, this);
 
 	test_started = false;
@@ -171,7 +178,7 @@ function finish_test( ){
 
 function more_information( ){
 	if( !test_started )
-		speak( "Sorry, I can't give you more information because you have not started the test yet!" );
+		speak( "Disculpe, no puedo proporcionar mas informacion hasta que comnience el!" );
 	else
 		speak( question.description );
 }
